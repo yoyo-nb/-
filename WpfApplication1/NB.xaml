@@ -1,0 +1,46 @@
+﻿<Window x:Class="WpfApplication1.NB"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NB" Height="145" Width="285" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
+    <Window.Resources>
+        <Style x:Key="threeStateButton" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="ImgBtnBg3" Source="resource/image/k1.png" />
+                            <Border>
+                                <TextBlock x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Content}"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" 
+									Value="resource/image/k2.png" 
+									TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Source" 
+									Value="resource/image/k3.png" 
+									TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Source" 
+									Value="resource/image/k1.png" 
+									TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF1F3181" MouseDown="Grid_MouseDown">
+        <Image x:Name="im" HorizontalAlignment="Left" Height="125" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Source="resource/image/n1.jpg" Stretch="UniformToFill"/>
+        <Label x:Name="la" Content="谢谢！&#xD;&#xA;我们也是&#xD;&#xA;这么认为的" HorizontalAlignment="Left" Margin="174,15.25,0,0" VerticalAlignment="Top" Width="106" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" FontSize="17.333" Foreground="White"/>
+        <Button x:Name="but1" Content="返 回" HorizontalAlignment="Left" Height="46" Margin="169,84,0,0" VerticalAlignment="Top" Width="111" Style="{StaticResource threeStateButton}" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="14.667" Foreground="#FFE8EEFF" Click="Button_Click" Opacity="0.995" RenderTransformOrigin="0.5,0.5" MouseEnter="playsmallvoice" />
+
+    </Grid>
+</Window>

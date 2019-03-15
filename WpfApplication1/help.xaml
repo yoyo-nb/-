@@ -1,0 +1,187 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="window" x:Class="WpfApplication1.help"
+        Title="游戏帮助" Height="522.875" Width="525" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="{x:Null}" Closed="window_Closed">
+    <Window.Resources>
+        <Style x:Key="threeStateButton" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="ImgBtnBg3" Source="resource/image/k1.png" />
+                            <Border>
+                                <TextBlock x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Content}"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" 
+        							Value="resource/image/k2.png" 
+        							TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Source" 
+        							Value="resource/image/k3.png" 
+        							TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Source" 
+        							Value="resource/image/k1.png" 
+        							TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="help">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(Brush.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.845"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-3"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-81"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="close" Completed="close">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(Brush.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.85"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="page2" Completed="cswi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-512">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut" Amplitude="0.5"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="page3" Completed="cswi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1042.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut" Amplitude="0.5"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="page4" Completed="cswi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1576.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut" Amplitude="0.5"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="page5" Completed="cswi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-2109">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut" Amplitude="0.5"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="page6" Completed="cswi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-2635.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut" Amplitude="0.5"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="page1" Completed="cswi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut" Amplitude="0.5"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource help}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5" Height="522.875" VerticalAlignment="Top">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Grid x:Name="grid1" Margin="0,83.375,0,0" RenderTransformOrigin="0.5,0.5" Height="429.5" VerticalAlignment="Top" MouseMove="Move">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.Background>
+                <SolidColorBrush Color="#FF0044A6" Opacity="0.85"/>
+            </Grid.Background>
+            <Button x:Name="but1" Content="返回主菜单" HorizontalAlignment="Left" Height="52" Margin="203,358,0,0" VerticalAlignment="Top" Width="115" Style="{StaticResource threeStateButton}" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="13.333" Foreground="#FFE8EEFF" Click="Button_Click" Opacity="0.995" RenderTransformOrigin="0.5,0.5" MouseEnter="playsmallvoice" />
+            <Button x:Name="bnt2" Content="下一页" HorizontalAlignment="Left" Height="52" Margin="387,358,0,0" VerticalAlignment="Top" Width="115" Style="{StaticResource threeStateButton}" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="13.333" Foreground="#FFE8EEFF" Opacity="0.995" Click="next" MouseEnter="playsmallvoice" />
+            <Button x:Name="bln0" Content="上一页" HorizontalAlignment="Left" Height="52" Margin="27,358,0,0" VerticalAlignment="Top" Width="115" Style="{StaticResource threeStateButton}" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="13.333" Foreground="#FFE8EEFF" Click="last" MouseEnter="playsmallvoice" Visibility="Hidden" />
+            <Grid x:Name="grid2" HorizontalAlignment="Left" Height="275.122" Margin="26.667,54.794,-2734.834,0" VerticalAlignment="Top" Width="3232.167" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Label x:Name="q" Content="起飞" HorizontalAlignment="Left" Margin="37.167,23.957,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        只有在掷得5点或6点后，方可将一枚&#xD;&#xA;棋子由基地起飞至起飞点。" HorizontalAlignment="Left" Margin="37.167,66.05,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Width="397.313"/>
+                <Label x:Name="q_Copy" Content="连投奖励" HorizontalAlignment="Left" Margin="37.167,134.625,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        在游戏进行过程中，掷得 6 点的游戏&#xD;&#xA;者可以连续投掷骰子，直至显示点数不是&#xD;&#xA; 6 点或回合结束。&#xA;" HorizontalAlignment="Left" Margin="37.167,176.718,0,0" VerticalAlignment="Top" Width="397.313" FontSize="21.333" Foreground="White" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S"/>
+                <Label x:Name="q_Copy1" Content="撞子" HorizontalAlignment="Left" Margin="542.167,23.957,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        棋子在行进过程中走至一格时，若已有&#xD;&#xA;敌方棋子停留，可将敌方的棋子逐回基地。" HorizontalAlignment="Left" Margin="542.167,64.06,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Width="422.313" Height="79.565"/>
+                <Label x:Name="q_Copy2" Content="跳子" HorizontalAlignment="Left" Margin="542.167,134.625,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        棋子在地图行走时，如果停留在和自己&#xD;&#xA;颜色相同格子，可以向前一个相同颜色格子&#xD;&#xA;作跳跃。" HorizontalAlignment="Left" Margin="542.167,176.718,0,0" VerticalAlignment="Top" Width="422.313" FontSize="21.333" Foreground="White" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Height="87.083"/>
+                <Label x:Name="q_Copy3" Content="飞棋" HorizontalAlignment="Left" Margin="1073.167,23.957,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        棋子若行进到颜色相同而有虚线连接的&#xD;&#xA;一格，可照虚线箭头指示的路线，通过虚线&#xD;&#xA;到前方颜色相同的的一格后，再跳至下一个&#xD;&#xA;与棋子颜色相同的格内；若棋子是由上一个&#xD;&#xA;颜色相同的格子跳至颜色相同而有虚线连接&#xD;&#xA;的一格内，则棋子照虚线箭头指示的路线，&#xD;&#xA;通过虚线到前方颜色相同的的一格后，棋子&#xD;&#xA;就不再移动。" HorizontalAlignment="Left" Margin="1073.167,66.05,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Width="423.313" Height="206.751"/>
+                <Label x:Name="q_Copy4" Content="迭子（一）" HorizontalAlignment="Left" Margin="1592.167,23.957,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        己方的棋子走至同一格内， 可迭在一起，&#xD;&#xA;这类情况称为“迭子”。 敌方的棋子不能在迭&#xD;&#xA;子上面飞过； 当敌方的棋子正好停留在“迭子&#xD;&#xA;  ”上方时， 敌方棋子与2架迭子棋子同时返回&#xD;&#xA;停机坪。 若其它游戏者所掷点数大于他的棋子&#xD;&#xA;与迭子的相差步数，则多余格数为 由迭子处返&#xD;&#xA;回的格数。&#xD;&#xA;" HorizontalAlignment="Left" Margin="1592.167,66.05,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Width="453.313" Height="206.751"/>
+                <Label x:Name="q_Copy5" Content="迭子（二）" HorizontalAlignment="Left" Margin="2126.167,23.957,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="        但当其它游戏者所掷点数是6  而且大于他&#xA;得棋子与迭子的相差步数时，那么其它游戏者&#xA;的棋子可以停于迭子上面。如果棋子在准备通&#xA;过虚线时有其他棋子停留在虚线和通往终点线&#xA;路的交叉点时： A 、如果对方是一个棋子，则&#xA;将该棋子逐回基地，本方棋子继续行进到对岸&#xA;； B 、如果对方是两个棋子重叠则该棋子不能&#xA;穿越虚线、必须绕行。&#xA;" HorizontalAlignment="Left" Margin="2126.167,66.05,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Width="441.98" Height="206.751"/>
+                <Label x:Name="q_Copy6" Content="终点" HorizontalAlignment="Left" Margin="2666.167,23.957,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White"/>
+                <Label Content="    “终点”就是游戏棋子的目的地。当玩家&#xA;有棋子到达本格时候，表示到达终点，不能&#xA;再控制该棋子。如骰子点数多过于到终点的&#xA;格数，也不需要后退，可以直接胜利返回。" HorizontalAlignment="Left" Margin="2666.167,66.05,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Width="441.98" Height="108.678"/>
+            </Grid>
+            <Label x:Name="label" Content="游戏规则" HorizontalAlignment="Left" Margin="190.166,21.544,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White" FontSize="32"/>
+            <Label x:Name="lpage" Content="1 / 6" HorizontalAlignment="Left" Margin="237.166,329.916,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontFamily="/WpfApplication1;component/Fonts/#FZZhunYuan-M02S" Foreground="White" FontSize="21.333" Width="51"/>
+        </Grid>
+    </Grid>
+</Window>

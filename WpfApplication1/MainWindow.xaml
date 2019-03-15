@@ -1,0 +1,318 @@
+﻿<Window x:Name="window" x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="飞行棋" Height="663" Width="580" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Closing="window_Closing">
+    <Window.Resources>
+        <Style x:Key="threeStateButton" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Name="ImgBtnBg3" Source="resource/image/k1.png" />
+                            <Border>
+                                <TextBlock x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding  Content}">
+                                </TextBlock>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" 
+                                        Value="resource/image/k2.png" 
+                                        TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Source" 
+                                        Value="resource/image/k3.png" 
+                                        TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Source" 
+                                        Value="resource/image/k1.png" 
+                                        TargetName="ImgBtnBg3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="yincang">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.995"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="4.5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="66"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="huifu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.995"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="4.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="66"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="loading">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-4.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-4.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-43.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-43.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="7.5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.995"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="but0">
+                <EasingDoubleKeyFrame KeyTime="0" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="but1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="but2">
+                <SplineDoubleKeyFrame KeyTime="0" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="but3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="but0">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="but1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="but2">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="but3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="image2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-5.263"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-5.263"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="-27.237"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="image2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.36"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.36"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="0.99"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="image2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.329"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.329"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="0.906"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-24.703"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-24.703"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="-10.696"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-55.88"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-55.88"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="6.065"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="image3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.557"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0.557"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="1.767"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="image3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.557"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0.557"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="1.755"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="5.888"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="5.888"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="5.276"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-21.883"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="-21.883"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="85.887"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="image3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="7.327"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="7.327"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="51.719"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image3">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="but4">
+                <EasingDoubleKeyFrame KeyTime="0" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="25.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="but4">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource loading}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid x:Name="grid" Margin="0,0,10,0" RenderTransformOrigin="0.5,0.5" Height="863" VerticalAlignment="Top">
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="560" Opacity="0.995" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="578" VerticalAlignment="Top" Width="574" Source="resource/image/background.png" Margin="0,0,-474,-478" RenderTransformOrigin="0.5,0.5" MouseMove="Move">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="image3" HorizontalAlignment="Left" Height="156.544" Margin="358.751,292.728,0,0" VerticalAlignment="Top" Width="192.998" RenderTransformOrigin="0.5,0.5" Source="resource/image/feiji2.png" MouseMove="Move">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="39.818"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="194.5" Margin="34,41.5,-14,0" VerticalAlignment="Top" Width="540" Source="resource/image/title.png" RenderTransformOrigin="0.5,0.5" MouseMove="Move">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="image2" HorizontalAlignment="Left" Height="355.832" Margin="-41.963,238.47,0,-14.302" VerticalAlignment="Top" Width="348.499" Source="resource/image/feiji1.png" RenderTransformOrigin="0.443,0.469" MouseMove="Move">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-27.299"/>
+                        <TranslateTransform X="-2.911" Y="10.989"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Button x:Name="but0"   Content="开始游戏" HorizontalAlignment="Center" Width="185" Height="69" 
+        		VerticalAlignment="Center" Style="{StaticResource threeStateButton}" Margin="201,219,174,292" Foreground="#FFD8E6FF" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="20" RenderTransformOrigin="0.5,0.5" MouseEnter="PlaySmallVoice" Click="but0_Click"  >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="but1"   Content="游戏帮助" HorizontalAlignment="Center" Width="185" Height="69" 
+        		VerticalAlignment="Center" Style="{StaticResource threeStateButton}" Margin="201,280,174,231" Foreground="#FFD8E6FF" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="20" Click="Button_Click_1" RenderTransformOrigin="0.5,0.5" MouseEnter="PlaySmallVoice"  >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="but4"   Content="设  置" HorizontalAlignment="Center" Width="185" Height="69" 
+            	VerticalAlignment="Center" Style="{StaticResource threeStateButton}" Margin="201,340,174,171" Foreground="#FFD8E6FF" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="20" RenderTransformOrigin="0.5,0.5" MouseEnter="PlaySmallVoice" Click="but4_Click"  >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="but2"   Content="关  于" HorizontalAlignment="Center" Width="185" Height="69" 
+        		VerticalAlignment="Center" Style="{StaticResource threeStateButton}" Margin="201,398,174,113" Foreground="#FFD8E6FF" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="20" RenderTransformOrigin="0.5,0.5" MouseEnter="PlaySmallVoice" Click="but2_Click"  >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="but3"   Content="退出游戏" HorizontalAlignment="Center" Width="185" Height="67" 
+        		VerticalAlignment="Center" Style="{StaticResource threeStateButton}" Margin="201,457,174,56" Foreground="#FFD8E6FF" FontFamily="/WpfApplication1;component/Fonts/#Tensentype LingHeiJ" FontSize="20" Click="Button_Click" RenderTransformOrigin="0.5,0.5" MouseEnter="PlaySmallVoice"  >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <MediaElement x:Name="mp" HorizontalAlignment="Left" Height="33" Margin="271,190,0,0" VerticalAlignment="Top" Width="32" Source="resource/music/bgm.mp3" MediaEnded="repaly" LoadedBehavior="Manual" Visibility="Hidden" Volume="1"/>
+        </Grid>
+
+
+
+
+    </Grid>
+
+</Window>
